@@ -1,0 +1,234 @@
+:root{
+   --white: #E6DDFF;
+   --main-dark: #2b2d42;
+   --light-red: #ef233c;
+   --dark-red: #d80032;
+   --middle: #a499b3;
+   --yellow:#DDFF0A;
+   --purple: #714BDC;
+   --light-yellow: #ffff99;
+   --dark-purple: #2F1B68;
+   --dull:#E5D8FF80 50%;
+}
+@font-face {
+ font-family: "Nunito";
+ src: url(./fonts/Nunito-VariableFont_wght.ttf);
+}
+
+* {
+ padding: 0;
+ margin: 0;
+ border: 0;
+}
+
+html,
+body {
+ width: 100%;
+ height: 100%;
+ background: var(--main-dark);
+}
+h1{
+   text-transform: uppercase;
+   color: var(--yellow);
+   font-size: 3em;
+   font-weight: bold;
+}
+body {
+ position: relative;
+ font-size: 32px;
+ font-family: "Nunito";
+ 
+ -webkit-user-select: none; /* Safari */
+ -ms-user-select: none; /* IE 10 and IE 11 */
+ user-select: none; /* Standard syntax */
+}
+#group{
+   outline: none;
+   cursor: pointer;
+   color: var(--dark-purple);
+   font-size: 18px;
+   border-radius: 10px;
+   padding: 5px 10px;
+   background: var(--white);
+}
+.field {
+ position: absolute;
+ width: 80%;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%, -50%);
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ height: 90vh;
+}
+.field__title{
+   
+}
+#content {
+   flex: 1 1 auto;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(120px, 250px)); /* Адаптивные столбцы */
+   gap: 10px; /* Отступы между элементами */
+   max-width: 100%; /* Ограничиваем ширину */
+   overflow-y: auto; /* Вертикальная прокрутка, если блоков много */
+   padding: 10px; /* Внутренние отступы */
+   box-sizing: border-box; /* Учитываем padding в размерах */ 
+   font-weight: 500;
+   margin: 30px 0 40px;
+}
+.item {
+   position: relative;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 15px;
+   background-color: var(--white);
+   color: var(--dark-purple);
+   text-align: center;
+   font-size: 1em;
+   transition: background-color 0.3s, transform 0.3s;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   user-select: none;
+   min-height: 40px;
+   font-weight: bold;
+   overflow: hidden;
+}
+
+.container-btn
+{
+   display: flex;
+   flex-direction: column;
+   gap:10px;
+   min-height: 200px;
+}
+.btn {
+   font-size: 1em;
+   display: block;
+   background: var(--purple);
+   border-radius: 15px;
+   padding: 10px 15px;
+   text-align: center;
+   transition: 0.2s;
+   color: var(--yellow);
+   cursor: pointer;
+   transition-duration: 0.3s;
+   text-transform: uppercase;
+   font-weight: bold;
+   width: 400px;
+   height: 95px;
+}
+.btn:hover{
+   box-sizing: border-box;
+   background: var(--yellow);
+   color: var(--purple);
+   transition: 0.3s;
+}
+#rebootBtn {
+ display: none;
+}
+
+@keyframes shine {
+   0% {left: -100px}
+   20% {left: 100%}
+   100% {left: 100%}
+}
+@media (max-width:990px) {
+   body{
+     font-size: 20px;
+   }
+   .field{
+     height: 90vh;
+   }
+   .btn{
+      width: 250px;
+      height: 50px;
+   }
+   .container-btn
+   {
+      min-height: 110px;
+   }
+  }
+@media (max-height:870px) {
+   body{
+     font-size: 20px;
+   }
+   
+   .btn{
+      width: 250px;
+      height: 75px;
+   }
+   .container-btn
+   {
+      min-height: 160px;
+   }
+  }
+
+  @media (max-height:685px) {
+   body{
+     font-size: 17px;
+   }
+   
+   .btn{
+      width: 250px;
+      height: 50px;
+   }
+   .container-btn
+   {
+      min-height: 110px;
+   }
+  }
+@media (max-width:660px) {
+ body{
+   font-size: 20px;
+ }
+}
+@media (max-width:385px) {
+ body{
+   font-size: 17px;
+ }
+}
+
+ 
+ .item.highlighted {
+   background-color: var(--yellow);
+   transform: scale(1.05);
+ }
+ 
+ .item.selected {
+   background-color: var(--yellow);
+   border: 1px solid var(--white);
+   color: var(--dark-purple);
+   font-weight: bold;
+ }
+ 
+ .item.crossed-out {
+   background-color: var(--main-dark);
+   color: var(--yellow);
+   border: 1px solid var(--white);
+   text-decoration: line-through;
+ }
+
+
+.selected:before {
+   content: '';
+   position: absolute;
+   width: 100%; /* Ширина блика больше ширины элемента */
+   height: 100%;
+   background-image: linear-gradient(
+       120deg,
+       rgba(255,255,255, 0) 30%,
+       rgba(255,255,255, .8),
+       rgba(255,255,255, 0) 70%
+   );
+   top: 0;
+   left: -100%; /* Начало за границей элемента */
+   animation: shine 3s infinite linear;
+   animation-delay: 0.5s;
+}
+
+@keyframes shine {
+   0% { left: -100%; }   /* Блик начинает за пределами элемента слева */
+   50% { left: 100%; }   /* Блик проходит через элемент */
+   100% { left: 100%; }  /* Конец за пределами элемента справа */
+ }
